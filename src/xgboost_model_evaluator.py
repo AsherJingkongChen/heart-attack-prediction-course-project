@@ -28,14 +28,24 @@ if __name__ == '__main__':
     cross_val_score,
   )
   from sklearn.preprocessing import LabelEncoder
+  from sys import argv, executable
   import xgboost as xgb
 
   pd.options.mode.chained_assignment = None
 
+  # check arguments
+  argc = len(argv)
+  if argc != 2:
+    raise TypeError(f'\
+  Program expected exact 2 arguments, got {argc}. \
+  Usage: {executable} {argv[0]} <data_path>')
+
+  # get arguments
+  data_path = argv[1]
+
   # read data
-  data_path = 'data/heart_2022_with_nans.csv'
   data = pd.read_csv(data_path)
-  log.info(f'Loaded dataset {data_path} to memory.')
+  log.info(f'Loaded dataset {data_path} to memory')
 
   # remove irrelevant features
   irrevalent_features = [
@@ -46,11 +56,11 @@ if __name__ == '__main__':
     'State',
   ]
   data.drop(columns=irrevalent_features, inplace=True)
-  log.info('Removed irrelevant features.')
+  log.info('Removed irrelevant features')
 
   # remove rows with missing values
   data.dropna(inplace=True)
-  log.info('Removed rows with missing values.')
+  log.info('Removed rows with missing values')
 
   # define target and features
   target = 'HadHeartAttack'
@@ -64,7 +74,7 @@ if __name__ == '__main__':
     if x[col].dtype == 'object':
       x[col] = LabelEncoder().fit_transform(x[col])
   y = pd.Series(LabelEncoder().fit_transform(y))
-  log.info('Transformed values.')
+  log.info('Transformed values')
   log.debug(f'transformed x:\n{x.head(10)}')
   log.debug(f'transformed y:\n{y.head(10)}')
 
@@ -89,7 +99,7 @@ if __name__ == '__main__':
   log.debug(f'model:\n{model}')
 
   # check auc
-  log.info('Started model evaluation.')
+  log.info('Started model evaluation')
   proc_timer = Process(target=timer_loop)
   proc_timer.start()
   scores = cross_val_score(
@@ -99,6 +109,6 @@ if __name__ == '__main__':
     n_jobs=6,
   )
   proc_timer.terminate()
-  log.info('Terminated model evaluation.')
+  log.info('Terminated model evaluation')
   log.info(f'Average AUC: {mean(scores)}')
   log.debug(f'AUCs:\n{scores}')
