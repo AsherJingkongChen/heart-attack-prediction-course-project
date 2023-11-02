@@ -106,7 +106,7 @@ if __name__ == '__main__':
     model, x, y,
     scoring='roc_auc',
     cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=1, random_state=6),
-    n_jobs=cpu_count() // 2,
+    n_jobs=cpu_count(),
   )
   proc_timer.terminate()
   log.info('Terminated model evaluation')
