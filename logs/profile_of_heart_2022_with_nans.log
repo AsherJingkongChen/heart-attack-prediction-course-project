@@ -1,0 +1,440 @@
+Column Names
+State                     Sex                       GeneralHealth             
+PhysicalHealthDays        MentalHealthDays          LastCheckupTime           
+PhysicalActivities        SleepHours                RemovedTeeth              
+HadHeartAttack            HadAngina                 HadStroke                 
+HadAsthma                 HadSkinCancer             HadCOPD                   
+HadDepressiveDisorder     HadKidneyDisease          HadArthritis              
+HadDiabetes               DeafOrHardOfHearing       BlindOrVisionDifficulty   
+DifficultyConcentrating   DifficultyWalking         DifficultyDressingBathing 
+DifficultyErrands         SmokerStatus              ECigaretteUsage           
+ChestScan                 RaceEthnicityCategory     AgeCategory               
+HeightInMeters            WeightInKilograms         BMI                       
+AlcoholDrinkers           HIVTesting                FluVaxLast12              
+PneumoVaxEver             TetanusLast10Tdap         HighRiskLastYear          
+CovidPos                  
+
+State
+Washington              0.058751
+New York                0.039988
+Minnesota               0.037789
+Ohio                    0.037038
+Maryland                0.036883
+Texas                   0.032002
+Florida                 0.030088
+Wisconsin               0.025332
+Kansas                  0.025267
+Massachusetts           0.024777
+California              0.024604
+Maine                   0.023917
+Indiana                 0.023512
+Virginia                0.023402
+Arizona                 0.022881
+Michigan                0.022596
+South Carolina          0.022548
+Utah                    0.022074
+Connecticut             0.021980
+Colorado                0.021039
+Georgia                 0.020749
+Iowa                    0.020104
+Vermont                 0.019794
+New Jersey              0.018442
+Hawaii                  0.017404
+Nebraska                0.016788
+Missouri                0.016710
+South Dakota            0.016678
+Montana                 0.015834
+New Hampshire           0.015180
+Idaho                   0.014108
+Rhode Island            0.013239
+Alaska                  0.013176
+Oklahoma                0.012974
+Oregon                  0.012931
+Louisiana               0.012646
+Puerto Rico             0.012376
+Arkansas                0.011927
+Tennessee               0.011830
+West Virginia           0.011190
+New Mexico              0.010689
+Pennsylvania            0.010294
+Alabama                 0.010123
+North Carolina          0.010121
+Mississippi             0.009523
+North Dakota            0.009330
+Wyoming                 0.009305
+Illinois                0.009112
+Kentucky                0.009038
+Delaware                0.008957
+District of Columbia    0.007272
+Nevada                  0.007162
+Guam                    0.005091
+Virgin Islands          0.003439
+Name: proportion, dtype: float64
+
+Sex
+Female    0.529939
+Male      0.470061
+Name: proportion, dtype: float64
+
+GeneralHealth
+Very good    0.333483
+Good         0.322596
+Excellent    0.161476
+Fair         0.135405
+Poor         0.044349
+NaN          0.002691
+Name: proportion, dtype: float64
+
+PhysicalHealthDays
+0.0     0.601662
+30.0    0.074320
+2.0     0.056738
+1.0     0.038753
+3.0     0.035828
+5.0     0.034406
+NaN     0.024548
+10.0    0.023788
+7.0     0.021001
+15.0    0.019740
+4.0     0.019010
+20.0    0.012178
+14.0    0.011298
+6.0     0.005702
+25.0    0.004900
+8.0     0.003956
+12.0    0.002496
+21.0    0.002332
+28.0    0.001687
+9.0     0.000923
+29.0    0.000820
+18.0    0.000609
+16.0    0.000573
+27.0    0.000422
+17.0    0.000416
+13.0    0.000364
+11.0    0.000362
+22.0    0.000315
+24.0    0.000281
+26.0    0.000245
+23.0    0.000222
+19.0    0.000108
+Name: proportion, dtype: float64
+
+MentalHealthDays
+0.0     0.595843
+30.0    0.060634
+2.0     0.053434
+5.0     0.044820
+10.0    0.034628
+3.0     0.034473
+15.0    0.032617
+1.0     0.032370
+20.0    0.020556
+NaN     0.020369
+4.0     0.017844
+7.0     0.017622
+25.0    0.006915
+14.0    0.006450
+6.0     0.005178
+8.0     0.003929
+12.0    0.002828
+28.0    0.002044
+21.0    0.001233
+29.0    0.001128
+9.0     0.000723
+18.0    0.000717
+16.0    0.000629
+17.0    0.000548
+27.0    0.000541
+22.0    0.000434
+13.0    0.000380
+24.0    0.000279
+11.0    0.000272
+26.0    0.000238
+23.0    0.000218
+19.0    0.000106
+Name: proportion, dtype: float64
+
+LastCheckupTime
+Within past year (anytime less than 12 months ago)         0.788404
+Within past 2 years (1 year but less than 2 years ago)     0.094172
+Within past 5 years (2 years but less than 5 years ago)    0.055898
+5 or more years ago                                        0.042861
+NaN                                                        0.018664
+Name: proportion, dtype: float64
+
+PhysicalActivities
+Yes    0.758335
+No     0.239210
+NaN    0.002455
+Name: proportion, dtype: float64
+
+SleepHours
+7.0     0.298624
+8.0     0.281809
+6.0     0.215397
+5.0     0.067670
+9.0     0.047649
+4.0     0.027931
+10.0    0.023496
+NaN     0.012250
+3.0     0.007324
+12.0    0.006749
+2.0     0.003480
+1.0     0.002592
+11.0    0.001541
+16.0    0.000739
+15.0    0.000712
+14.0    0.000663
+18.0    0.000377
+13.0    0.000371
+20.0    0.000321
+24.0    0.000117
+17.0    0.000061
+22.0    0.000043
+23.0    0.000040
+19.0    0.000036
+21.0    0.000009
+Name: proportion, dtype: float64
+
+RemovedTeeth
+None of them              0.524462
+1 to 5                    0.290462
+6 or more, but not all    0.102374
+All                       0.057181
+NaN                       0.025521
+Name: proportion, dtype: float64
+
+HadHeartAttack
+No     0.936709
+Yes    0.056406
+NaN    0.006886
+Name: proportion, dtype: float64
+
+HadAngina
+No     0.930457
+Yes    0.059647
+NaN    0.009896
+Name: proportion, dtype: float64
+
+HadStroke
+No     0.953281
+Yes    0.043221
+NaN    0.003498
+Name: proportion, dtype: float64
+
+HadAsthma
+No     0.846187
+Yes    0.149830
+NaN    0.003983
+Name: proportion, dtype: float64
+
+HadSkinCancer
+No     0.913221
+Yes    0.079718
+NaN    0.007061
+Name: proportion, dtype: float64
+
+HadCOPD
+No     0.914913
+Yes    0.080102
+NaN    0.004985
+Name: proportion, dtype: float64
+
+HadDepressiveDisorder
+No     0.788328
+Yes    0.205355
+NaN    0.006317
+Name: proportion, dtype: float64
+
+HadKidneyDisease
+No     0.950035
+Yes    0.045638
+NaN    0.004327
+Name: proportion, dtype: float64
+
+HadArthritis
+No     0.654527
+Yes    0.339558
+NaN    0.005915
+Name: proportion, dtype: float64
+
+HadDiabetes
+No                                         0.828343
+Yes                                        0.137393
+No, pre-diabetes or borderline diabetes    0.023204
+Yes, but only during pregnancy (female)    0.008618
+NaN                                        0.002442
+Name: proportion, dtype: float64
+
+DeafOrHardOfHearing
+No     0.866123
+Yes    0.087493
+NaN    0.046384
+Name: proportion, dtype: float64
+
+BlindOrVisionDifficulty
+No     0.898408
+Yes    0.053148
+NaN    0.048444
+Name: proportion, dtype: float64
+
+DifficultyConcentrating
+No     0.832993
+Yes    0.112551
+NaN    0.054456
+Name: proportion, dtype: float64
+
+DifficultyWalking
+No     0.793111
+Yes    0.152946
+NaN    0.053944
+Name: proportion, dtype: float64
+
+DifficultyDressingBathing
+No     0.908504
+NaN    0.053726
+Yes    0.037771
+Name: proportion, dtype: float64
+
+DifficultyErrands
+No     0.869470
+Yes    0.072893
+NaN    0.057637
+Name: proportion, dtype: float64
+
+SmokerStatus
+Never smoked                             0.552544
+Former smoker                            0.255596
+Current smoker - now smokes every day    0.080882
+NaN                                      0.079666
+Current smoker - now smokes some days    0.031312
+Name: proportion, dtype: float64
+
+ECigaretteUsage
+Never used e-cigarettes in my entire life    0.700889
+Not at all (right now)                       0.169316
+NaN                                          0.080111
+Use them some days                           0.026361
+Use them every day                           0.023323
+Name: proportion, dtype: float64
+
+ChestScan
+No     0.501471
+Yes    0.372620
+NaN    0.125909
+Name: proportion, dtype: float64
+
+RaceEthnicityCategory
+White only, Non-Hispanic         0.719834
+Hispanic                         0.096414
+Black only, Non-Hispanic         0.079630
+Other race only, Non-Hispanic    0.051025
+NaN                              0.031579
+Multiracial, Non-Hispanic        0.021517
+Name: proportion, dtype: float64
+
+AgeCategory
+Age 65 to 69       0.105809
+Age 60 to 64       0.099995
+Age 70 to 74       0.097661
+Age 55 to 59       0.082719
+Age 80 or older    0.081439
+Age 50 to 54       0.075582
+Age 75 to 79       0.073052
+Age 40 to 44       0.067265
+Age 45 to 49       0.064096
+Age 35 to 39       0.064084
+Age 18 to 24       0.060524
+Age 30 to 34       0.057976
+Age 25 to 29       0.049401
+NaN                0.020396
+Name: proportion, dtype: float64
+
+HeightInMeters
+1.68    0.082632
+1.63    0.080026
+1.70    0.076467
+1.65    0.073652
+1.78    0.071974
+          ...   
+1.33    0.000002
+0.99    0.000002
+2.02    0.000002
+1.94    0.000002
+0.95    0.000002
+Name: proportion, Length: 110, dtype: float64
+
+WeightInKilograms
+NaN       0.094529
+90.72     0.047876
+81.65     0.044277
+68.04     0.039528
+72.57     0.038589
+            ...   
+281.00    0.000002
+164.00    0.000002
+232.69    0.000002
+176.00    0.000002
+189.00    0.000002
+Name: proportion, Length: 600, dtype: float64
+
+BMI
+NaN      0.109644
+26.63    0.009575
+27.46    0.007362
+24.41    0.007162
+27.44    0.007027
+           ...   
+80.63    0.000002
+60.90    0.000002
+46.75    0.000002
+62.69    0.000002
+48.63    0.000002
+Name: proportion, Length: 3986, dtype: float64
+
+AlcoholDrinkers
+Yes    0.473772
+No     0.421599
+NaN    0.104630
+Name: proportion, dtype: float64
+
+HIVTesting
+No     0.561449
+Yes    0.289995
+NaN    0.148556
+Name: proportion, dtype: float64
+
+FluVaxLast12
+Yes    0.470099
+No     0.424043
+NaN    0.105858
+Name: proportion, dtype: float64
+
+PneumoVaxEver
+No     0.484360
+Yes    0.342568
+NaN    0.173072
+Name: proportion, dtype: float64
+
+TetanusLast10Tdap
+No, did not receive any tetanus shot in the past 10 years    0.272937
+Yes, received tetanus shot but not sure what type            0.255486
+Yes, received Tdap                                           0.224524
+NaN                                                          0.185374
+Yes, received tetanus shot, but not Tdap                     0.061678
+Name: proportion, dtype: float64
+
+HighRiskLastYear
+No     0.847668
+NaN    0.113726
+Yes    0.038607
+Name: proportion, dtype: float64
+
+CovidPos
+No                                                               0.606685
+Yes                                                              0.249088
+NaN                                                              0.114043
+Tested positive using home test without a health professional    0.030184
+Name: proportion, dtype: float64
+
