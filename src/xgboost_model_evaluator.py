@@ -14,13 +14,13 @@ log.basicConfig(
 def timer_loop():
   i = 0
   while True:
-    dots = '.' * (1 + i // 15) + ' ' * (4 - i // 15)
+    dots = '.' * (1 + i // 10) + ' ' * (4 - i // 10)
     log.info(f'Evaluating {dots}\033[A')
-    i = (i + 1) % 45
-    sleep(1 / 30)
+    i = (i + 1) % 30
+    sleep(1 / 20)
 
 if __name__ == '__main__':
-  from multiprocessing import Process
+  from multiprocessing import cpu_count, Process
   from numpy import mean
   import pandas
   from sklearn.model_selection import (
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     model, x, y,
     scoring='roc_auc',
     cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=1, random_state=6),
-    n_jobs=6,
+    n_jobs=cpu_count() // 2,
   )
   proc_timer.terminate()
   log.info('Terminated model evaluation')
