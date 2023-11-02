@@ -22,16 +22,16 @@ def timer_loop():
 if __name__ == '__main__':
   from multiprocessing import Process
   from numpy import mean
-  import pandas as pd
+  import pandas
   from sklearn.model_selection import (
     RepeatedStratifiedKFold,
     cross_val_score,
   )
   from sklearn.preprocessing import LabelEncoder
   from sys import argv, executable
-  import xgboost as xgb
+  from xgboost import XGBClassifier
 
-  pd.options.mode.chained_assignment = None
+  pandas.options.mode.chained_assignment = None
 
   # check arguments
   argc = len(argv)
@@ -44,7 +44,7 @@ if __name__ == '__main__':
   data_path = argv[1]
 
   # read data
-  data = pd.read_csv(data_path)
+  data = pandas.read_csv(data_path)
   log.info(f'Loaded dataset {data_path} to memory')
 
   # remove irrelevant features
@@ -73,13 +73,13 @@ if __name__ == '__main__':
   for col in x.columns:
     if x[col].dtype == 'object':
       x[col] = LabelEncoder().fit_transform(x[col])
-  y = pd.Series(LabelEncoder().fit_transform(y))
+  y = pandas.Series(LabelEncoder().fit_transform(y))
   log.info('Transformed values')
   log.debug(f'transformed x:\n{x.head(10)}')
   log.debug(f'transformed y:\n{y.head(10)}')
 
   # create model
-  model = xgb.XGBClassifier(
+  model = XGBClassifier(
     colsample_bynode=0.6,
     colsample_bytree=0.6,
     gamma=0.001,
