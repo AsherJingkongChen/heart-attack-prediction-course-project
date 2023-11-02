@@ -2,11 +2,12 @@ name: Main branch CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  main:
     strategy:
       matrix:
         os: [macos-latest, windows-latest]
