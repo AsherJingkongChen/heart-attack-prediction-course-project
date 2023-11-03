@@ -19,18 +19,19 @@ def timer_loop():
     i = (i + 1) % 30
     sleep(1 / 20)
 
-if __name__ == '__main__':
+def main():
   from multiprocessing import cpu_count, Process
   from numpy import mean
   import pandas
+  from sklearn.ensemble import ExtraTreesClassifier
   from sklearn.model_selection import (
     RepeatedStratifiedKFold,
     cross_val_score,
+    GridSearchCV,
   )
   from sklearn.preprocessing import LabelEncoder
   from sys import argv, executable
   from xgboost import XGBClassifier
-
   pandas.options.mode.chained_assignment = None
 
   # check arguments
@@ -51,9 +52,7 @@ if __name__ == '__main__':
   irrevalent_features = [
     'BMI',
     'DifficultyDressingBathing',
-    'HIVTesting',
     'HighRiskLastYear',
-    'State',
   ]
   data.drop(columns=irrevalent_features, inplace=True)
   log.info('Removed irrelevant features')
@@ -78,7 +77,8 @@ if __name__ == '__main__':
   log.debug(f'transformed x:\n{x.head(10)}')
   log.debug(f'transformed y:\n{y.head(10)}')
 
-  # create model
+  # define model
+  # [todo] GridSearchCV tuning
   model = XGBClassifier(
     colsample_bynode=0.6,
     colsample_bytree=0.6,
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     max_depth=6,
     min_child_weight=60,
     n_estimators=100,
-    n_jobs=1,
+    n_jobs=max(1, cpu_count() - 1),
     num_parallel_tree=6,
     random_state=6,
     reg_alpha=0.001,
@@ -105,10 +105,13 @@ if __name__ == '__main__':
   scores = cross_val_score(
     model, x, y,
     scoring='roc_auc',
-    cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=1, random_state=6),
-    n_jobs=cpu_count(),
+    cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=2, random_state=6),
+    n_jobs=1,
   )
   proc_timer.terminate()
   log.info('Terminated model evaluation')
   log.info(f'Average AUC: {mean(scores)}')
   log.debug(f'AUCs:\n{scores}')
+
+if __name__ == '__main__':
+  main()
