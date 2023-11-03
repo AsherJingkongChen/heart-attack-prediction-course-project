@@ -23,15 +23,14 @@ def main():
   from multiprocessing import cpu_count, Process
   from numpy import mean
   import pandas
-  from sklearn.ensemble import ExtraTreesClassifier
   from sklearn.model_selection import (
-    RepeatedStratifiedKFold,
+    StratifiedKFold,
     cross_val_score,
-    GridSearchCV,
   )
   from sklearn.preprocessing import LabelEncoder
   from sys import argv, executable
   from xgboost import XGBClassifier
+
   pandas.options.mode.chained_assignment = None
 
   # check arguments
@@ -65,8 +64,6 @@ def main():
   target = 'HadHeartAttack'
   x = data.drop(columns=target)
   y = data[target]
-  log.debug(f'x:\n{x.head(10)}')
-  log.debug(f'y:\n{y.head(10)}')
 
   # transform values to numeric
   for col in x.columns:
@@ -74,11 +71,9 @@ def main():
       x[col] = LabelEncoder().fit_transform(x[col])
   y = pandas.Series(LabelEncoder().fit_transform(y))
   log.info('Transformed values')
-  log.debug(f'transformed x:\n{x.head(10)}')
-  log.debug(f'transformed y:\n{y.head(10)}')
 
   # define model
-  # [todo] GridSearchCV tuning
+  # [todo] tuning
   model = XGBClassifier(
     colsample_bynode=0.6,
     colsample_bytree=0.6,
@@ -98,20 +93,31 @@ def main():
 
   log.debug(f'model:\n{model}')
 
-  # check auc
+  # evaluate model
   log.info('Started model evaluation')
+
+  # start timer
   proc_timer = Process(target=timer_loop)
   proc_timer.start()
-  scores = cross_val_score(
-    model, x, y,
-    scoring='roc_auc',
-    cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=2, random_state=6),
-    n_jobs=1,
-  )
-  proc_timer.terminate()
-  log.info('Terminated model evaluation')
-  log.info(f'Average AUC: {mean(scores)}')
+
+  # cross validation
+  try:
+    scores = cross_val_score(
+      model, x, y,
+      scoring='roc_auc',
+      cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
+      n_jobs=1,
+    )
+  except:
+    log.error('Failed to evaluate model')
+    raise
+  finally:
+    log.info('Terminated model evaluation')
+    proc_timer.terminate()
+
+  # print average "Area Under the ROC Curve"
   log.debug(f'AUCs:\n{scores}')
+  log.info(f'Average AUC: {mean(scores)}')
 
 if __name__ == '__main__':
   main()
