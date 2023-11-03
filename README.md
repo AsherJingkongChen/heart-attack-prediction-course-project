@@ -15,3 +15,4 @@
 
 ## Environments
 - Python 3.9 with PIP
+- Windows, macOS (x86_64 & ARM64)
