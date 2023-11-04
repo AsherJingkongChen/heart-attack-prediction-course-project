@@ -19,12 +19,12 @@ def timer_loop():
     i = (i + 1) % 30
     sleep(1 / 20)
 
-if __name__ == '__main__':
+def main():
   from multiprocessing import cpu_count, Process
   from numpy import mean
   import pandas
   from sklearn.model_selection import (
-    RepeatedStratifiedKFold,
+    StratifiedKFold,
     cross_val_score,
   )
   from sklearn.preprocessing import LabelEncoder
@@ -51,9 +51,7 @@ if __name__ == '__main__':
   irrevalent_features = [
     'BMI',
     'DifficultyDressingBathing',
-    'HIVTesting',
     'HighRiskLastYear',
-    'State',
   ]
   data.drop(columns=irrevalent_features, inplace=True)
   log.info('Removed irrelevant features')
@@ -66,8 +64,6 @@ if __name__ == '__main__':
   target = 'HadHeartAttack'
   x = data.drop(columns=target)
   y = data[target]
-  log.debug(f'x:\n{x.head(10)}')
-  log.debug(f'y:\n{y.head(10)}')
 
   # transform values to numeric
   for col in x.columns:
@@ -75,10 +71,9 @@ if __name__ == '__main__':
       x[col] = LabelEncoder().fit_transform(x[col])
   y = pandas.Series(LabelEncoder().fit_transform(y))
   log.info('Transformed values')
-  log.debug(f'transformed x:\n{x.head(10)}')
-  log.debug(f'transformed y:\n{y.head(10)}')
 
-  # create model
+  # define model
+  # [todo] tuning
   model = XGBClassifier(
     colsample_bynode=0.6,
     colsample_bytree=0.6,
@@ -88,7 +83,7 @@ if __name__ == '__main__':
     max_depth=6,
     min_child_weight=60,
     n_estimators=100,
-    n_jobs=1,
+    n_jobs=max(1, cpu_count() - 1),
     num_parallel_tree=6,
     random_state=6,
     reg_alpha=0.001,
@@ -98,17 +93,31 @@ if __name__ == '__main__':
 
   log.debug(f'model:\n{model}')
 
-  # check auc
+  # evaluate model
   log.info('Started model evaluation')
+
+  # start timer
   proc_timer = Process(target=timer_loop)
   proc_timer.start()
-  scores = cross_val_score(
-    model, x, y,
-    scoring='roc_auc',
-    cv=RepeatedStratifiedKFold(n_splits=10, n_repeats=1, random_state=6),
-    n_jobs=cpu_count(),
-  )
-  proc_timer.terminate()
-  log.info('Terminated model evaluation')
-  log.info(f'Average AUC: {mean(scores)}')
+
+  # cross validation
+  try:
+    scores = cross_val_score(
+      model, x, y,
+      scoring='roc_auc',
+      cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
+      n_jobs=1,
+    )
+  except:
+    log.error('Failed to evaluate model')
+    raise
+  finally:
+    log.info('Terminated model evaluation')
+    proc_timer.terminate()
+
+  # print average "Area Under the ROC Curve"
   log.debug(f'AUCs:\n{scores}')
+  log.info(f'Average AUC: {mean(scores)}')
+
+if __name__ == '__main__':
+  main()
