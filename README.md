@@ -8,7 +8,7 @@
 
 ## Models
 
-### XGBoost (E<u>x</u>treme <u>G</u>radient <u>Boost</u>ing)
+### XGBoost (E[x](#)treme [G](#)radient [Boost](#)ing)
 - Python package: [link](https://xgboost.readthedocs.io/en/stable/python/index.html)
 - Use [`XGBClassfier`](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier) in its Python package.
 - evaluation: [link](./src/xgboost_model_evaluator.py)
