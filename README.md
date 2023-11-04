@@ -8,10 +8,11 @@
 
 ## Models
 
-### XGBoost (E**x**treme **G**radient **Boost**ing)
+### XGBoost (E<u>x</u>treme <u>G</u>radient <u>Boost</u>ing)
 - Python package: [link](https://xgboost.readthedocs.io/en/stable/python/index.html)
 - Use [`XGBClassfier`](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBClassifier) in its Python package.
-- evaluator: [link](./src/xgboost_model_evaluator.py)
+- evaluation: [link](./src/xgboost_model_evaluator.py)
+- logging: [link](./logs/run_xgboost_model_evaluator.py.log)
 
 ## Environments
 - Python 3.9 with PIP
