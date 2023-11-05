@@ -1,18 +1,19 @@
 """
-Evaluate an XGBoost model on a heart disease dataset
-using stratified k-fold cross-validation.
+Tune an XGBoost model on a heart disease dataset
+using GridSearchCV with stratified k fold method.
 """
 
 import logging as log
-from numpy import mean
+from numpy import linspace, logspace
 import pandas
 from sklearn.model_selection import (
+  GridSearchCV,
   StratifiedKFold,
-  cross_val_score,
 )
 from sklearn.preprocessing import LabelEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
+
 log.basicConfig(
   level=log.INFO,
   format='%(levelname)s\t%(asctime)s.%(msecs)03d\t%(message)s',
@@ -61,32 +62,34 @@ y = pandas.Series(LabelEncoder().fit_transform(y))
 log.info('Transformed values')
 
 # define model
-model = XGBClassifier(
-  n_jobs=4,
-  random_state=6,
-  n_estimators=550,
-  learning_rate=0.01,
-  max_depth=8,
-  min_child_weight=42,
-  scale_pos_weight=5,
-  subsample=0.6,
-  reg_alpha=0,
-  reg_lambda=3.75,
-  gamma=0.5,
-)
-log.debug(f'model:\n{model}')
-
-# evaluate model
-log.info('Started model evaluation')
-
-# cross validation
-scores = cross_val_score(
-  model, x, y,
+model = GridSearchCV(
+  estimator=XGBClassifier(
+    random_state=6,
+    n_jobs=4,
+    n_estimators=1,
+    num_parallel_tree=1,
+    learning_rate=0.01,
+  ),
+  param_grid={
+    'max_depth': [8],
+    'min_child_weight': [42],
+    'scale_pos_weight': [5],
+    'subsample': [0.6],
+    'reg_alpha': [0],
+    'reg_lambda': [3.75],
+    'gamma': [0.5],
+  },
   scoring='roc_auc',
   cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
   n_jobs=1,
   verbose=1,
 )
-log.info('Terminated model evaluation')
-log.debug(f'AUCs:\n{scores}')
-log.info(f'Average AUC: {mean(scores)}')
+
+# tuning parameters
+log.info('Started model parameter tuning')
+
+# grid search cross validation
+result = model.fit(x, y)
+log.info('Terminated model parameter tuning')
+log.info(f'Best AUC score: {result.best_score_}')
+log.info(f'Best parameters: {result.best_params_}')
