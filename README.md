@@ -1,10 +1,5 @@
 # Heart Attack Prediction
 
-## Note
-
-### Please install the complete data file from [Kaggle.com](https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease/)
-> Sorry but the file is too big
-
 ## Datasets
 
 ### Indicators of Heart Disease (2022 UPDATE)
