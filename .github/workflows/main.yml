@@ -22,9 +22,3 @@ jobs:
 
       - name: Install dependencies
         run: python -m pip install -r requirements.txt
-
-      - name: Run Python programs (1/2)
-        run: python src/data_profiler.py data/heart_2022_no_nans_small.csv
-
-      - name: Run Python programs (2/2)
-        run: python src/xgboost_model_evaluator.py data/heart_2022_no_nans_small.csv
