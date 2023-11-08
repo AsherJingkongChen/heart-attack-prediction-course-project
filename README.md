@@ -15,5 +15,5 @@
 - logging: [link](./logs/run_xgboost_model_evaluator.py.log)
 
 ## Environments
-- Python 3.9 with PIP
+- Pyt hon 3.9 with PIP
 - Windows, macOS (x86_64 & ARM64)
