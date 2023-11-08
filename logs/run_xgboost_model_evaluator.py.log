@@ -1,12 +1,7 @@
-INFO    2023-11-04 20:41:36.870 Loaded dataset data/heart_2022_with_nans.csv to memory
-INFO    2023-11-04 20:41:37.050 Removed irrelevant features
-INFO    2023-11-04 20:41:37.455 Removed rows with missing values
-INFO    2023-11-04 20:41:38.479 Transformed values
-INFO    2023-11-04 20:41:38.482 Started model evaluation
-INFO    2023-11-04 20:42:32.253 Terminated model evaluation
-INFO    2023-11-04 20:42:32.255 Average AUC: 0.8928701302089301
-
-name: python3 src/xgboost_model_evaluator.py data/heart_2022_with_nans.csv
-time: (383161ms, 97988ms, 58090ms)
-cpu:  828%
-mem:  1333840 KiB
+INFO    2023-11-08 11:43:25.691 Loaded dataset data/heart_2022_with_nans.csv to memory
+INFO    2023-11-08 11:43:25.865 Removed irrelevant features
+INFO    2023-11-08 11:43:26.274 Removed rows with missing values
+INFO    2023-11-08 11:43:27.258 Transformed values
+INFO    2023-11-08 11:43:27.260 Started model evaluation
+INFO    2023-11-08 11:44:07.068 Terminated model evaluation
+INFO    2023-11-08 11:44:07.069 Average AUC: 0.8921593593808875
