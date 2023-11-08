@@ -1,5 +1,13 @@
 # Heart Attack Prediction
 
+# Bootstrap
+*nix os:
+```shell
+python3 -m pip install -r requirements.txt
+python3 src/data_profiler.py data/heart_2022_no_nans.csv
+python3 src/xgboost_model_evaluator.py data/heart_2022_no_nans.csv
+```
+
 ## Datasets
 
 ### Indicators of Heart Disease (2022 UPDATE)
