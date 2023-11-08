@@ -1,15 +1,11 @@
 # Heart Attack Prediction
 
-## Note
-
-### Please install the complete data file from [Kaggle.com](https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease/)
-> Sorry but the file is too big
-
 ## Datasets
 
 ### Indicators of Heart Disease (2022 UPDATE)
+- path: [data/heart_2022_no_nans.csv](./data/heart_2022_no_nans.csv)
 - source: [link](https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease/)
-- profile: [link](./logs/profile_of_heart_2022_with_nans.log) (produced by [data profiler](./src/data_profiler.py))
+- profile: [link](./logs/profile_of_heart_2022_no_nans.log) (produced by [data profiler](./src/data_profiler.py))
 
 ## Models
 

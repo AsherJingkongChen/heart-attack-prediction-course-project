@@ -1,7 +1,7 @@
-INFO    2023-11-08 11:43:25.691 Loaded dataset data/heart_2022_with_nans.csv to memory
-INFO    2023-11-08 11:43:25.865 Removed irrelevant features
-INFO    2023-11-08 11:43:26.274 Removed rows with missing values
-INFO    2023-11-08 11:43:27.258 Transformed values
-INFO    2023-11-08 11:43:27.260 Started model evaluation
-INFO    2023-11-08 11:44:07.068 Terminated model evaluation
-INFO    2023-11-08 11:44:07.069 Average AUC: 0.8921593593808875
+INFO	2023-11-09 00:28:42.495	Loaded dataset data/heart_2022_no_nans.csv to memory
+INFO	2023-11-09 00:28:42.593	Removed irrelevant features
+INFO	2023-11-09 00:28:42.825	Removed rows with missing values
+INFO	2023-11-09 00:28:43.815	Transformed values
+INFO	2023-11-09 00:28:43.817	Started model evaluation
+INFO	2023-11-09 00:29:22.041	Terminated model evaluation
+INFO	2023-11-09 00:29:22.042	Average AUC: 0.8916317348451036
