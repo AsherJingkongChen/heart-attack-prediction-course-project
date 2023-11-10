@@ -13,6 +13,7 @@ from sklearn.model_selection import (
 from sklearn.preprocessing import LabelEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
+
 log.basicConfig(
   level=log.INFO,
   format='%(levelname)s\t%(asctime)s.%(msecs)03d\t%(message)s',
@@ -37,9 +38,8 @@ log.info(f'Loaded dataset {data_path} to memory')
 
 # remove irrelevant features
 irrevalent_features = [
-  'BMI',
-  'DifficultyDressingBathing',
-  'HighRiskLastYear',
+  'MentalHealthDays',
+  'PhysicalHealthDays',
 ]
 data.drop(columns=irrevalent_features, inplace=True)
 log.info('Removed irrelevant features')
@@ -62,7 +62,7 @@ log.info('Transformed values')
 
 # define model
 model = XGBClassifier(
-  n_jobs=4,
+  n_jobs=1,
   random_state=6,
   n_estimators=550,
   learning_rate=0.01,
@@ -84,8 +84,7 @@ scores = cross_val_score(
   model, x, y,
   scoring='roc_auc',
   cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
-  n_jobs=1,
-  verbose=1,
+  n_jobs=4,
 )
 log.info('Terminated model evaluation')
 log.debug(f'AUCs:\n{scores}')
