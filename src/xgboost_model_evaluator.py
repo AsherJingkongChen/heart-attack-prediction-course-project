@@ -6,12 +6,11 @@ using stratified k-fold cross-validation.
 import logging as log
 from numpy import mean
 import pandas
-from sklearn.feature_extraction import DictVectorizer
 from sklearn.model_selection import (
   StratifiedKFold,
   cross_val_score,
 )
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
 
@@ -61,9 +60,7 @@ y = LabelEncoder().fit_transform(data[target])
 
 # transform values to numeric
 x = pandas.DataFrame(
-  DictVectorizer(sparse=False).fit_transform(
-    x.to_dict(orient='records')
-  )
+  OneHotEncoder().fit_transform(x).toarray()
 )
 log.info('Transformed values')
 log.debug(x.head())
@@ -72,7 +69,7 @@ log.debug(x.head())
 model = XGBClassifier(
   n_jobs=1,
   random_state=6,
-  n_estimators=550,
+  n_estimators=50,
   learning_rate=0.01,
   max_depth=8,
   min_child_weight=42,
