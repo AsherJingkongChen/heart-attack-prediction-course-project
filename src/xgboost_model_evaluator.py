@@ -38,8 +38,10 @@ log.info(f'Loaded dataset {data_path} to memory')
 
 # remove irrelevant features
 irrevalent_features = [
+  'BMI',
   'MentalHealthDays',
   'PhysicalHealthDays',
+  'State',
 ]
 data.drop(columns=irrevalent_features, inplace=True)
 log.info('Removed irrelevant features')
@@ -65,7 +67,7 @@ log.debug(x.head())
 model = XGBClassifier(
   n_jobs=1,
   random_state=6,
-  n_estimators=50,
+  n_estimators=500,
   learning_rate=0.01,
   max_depth=8,
   min_child_weight=42,

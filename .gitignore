@@ -3,6 +3,7 @@
 .vscode
 *.swp
 
+tmp
 __pycache__
 
 # data/heart_2022_no_nans.csv
