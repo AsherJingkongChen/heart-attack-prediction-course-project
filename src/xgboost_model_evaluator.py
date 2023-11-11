@@ -6,6 +6,7 @@ using stratified k-fold cross-validation.
 import logging as log
 from numpy import mean
 import pandas
+from sklearn.feature_extraction import DictVectorizer
 from sklearn.model_selection import (
   StratifiedKFold,
   cross_val_score,
@@ -48,17 +49,24 @@ log.info('Removed irrelevant features')
 data.dropna(inplace=True)
 log.info('Removed rows with missing values')
 
-# define target and features
+# transform values to numeric
+# for col in data.columns:
+#   if data[col].dtype == 'object':
+#     data[col] = LabelEncoder().fit_transform(data[col])
+
+# split target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
-y = data[target]
+y = LabelEncoder().fit_transform(data[target])
 
 # transform values to numeric
-for col in x.columns:
-  if x[col].dtype == 'object':
-    x[col] = LabelEncoder().fit_transform(x[col])
-y = pandas.Series(LabelEncoder().fit_transform(y))
+x = pandas.DataFrame(
+  DictVectorizer(sparse=False).fit_transform(
+    x.to_dict(orient='records')
+  )
+)
 log.info('Transformed values')
+log.debug(x.head())
 
 # define model
 model = XGBClassifier(
@@ -70,7 +78,7 @@ model = XGBClassifier(
   min_child_weight=42,
   scale_pos_weight=5,
   subsample=0.6,
-  reg_alpha=0,
+  reg_alpha=0.0,
   reg_lambda=3.75,
   gamma=0.5,
 )
