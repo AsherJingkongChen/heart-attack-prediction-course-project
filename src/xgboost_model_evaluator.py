@@ -49,19 +49,15 @@ data.dropna(inplace=True)
 log.info('Removed rows with missing values')
 
 # transform values to numeric
-# for col in data.columns:
-#   if data[col].dtype == 'object':
-#     data[col] = LabelEncoder().fit_transform(data[col])
+for col in data.columns:
+  if data[col].dtype == 'object':
+    data[col] = LabelEncoder().fit_transform(data[col])
 
 # split target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
 y = LabelEncoder().fit_transform(data[target])
 
-# transform values to numeric
-x = pandas.DataFrame(
-  OneHotEncoder().fit_transform(x).toarray()
-)
 log.info('Transformed values')
 log.debug(x.head())
 
