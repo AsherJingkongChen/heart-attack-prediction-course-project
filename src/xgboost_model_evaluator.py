@@ -10,7 +10,7 @@ from sklearn.model_selection import (
   StratifiedKFold,
   cross_val_score,
 )
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
 
@@ -38,8 +38,10 @@ log.info(f'Loaded dataset {data_path} to memory')
 
 # remove irrelevant features
 irrevalent_features = [
+  'BMI',
   'MentalHealthDays',
   'PhysicalHealthDays',
+  'State',
 ]
 data.drop(columns=irrevalent_features, inplace=True)
 log.info('Removed irrelevant features')
@@ -48,29 +50,30 @@ log.info('Removed irrelevant features')
 data.dropna(inplace=True)
 log.info('Removed rows with missing values')
 
-# define target and features
+# transform values to numeric
+for col in data.columns:
+  if data[col].dtype == 'object':
+    data[col] = LabelEncoder().fit_transform(data[col])
+
+# split target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
-y = data[target]
+y = LabelEncoder().fit_transform(data[target])
 
-# transform values to numeric
-for col in x.columns:
-  if x[col].dtype == 'object':
-    x[col] = LabelEncoder().fit_transform(x[col])
-y = pandas.Series(LabelEncoder().fit_transform(y))
 log.info('Transformed values')
+log.debug(x.head())
 
 # define model
 model = XGBClassifier(
   n_jobs=1,
   random_state=6,
-  n_estimators=550,
+  n_estimators=500,
   learning_rate=0.01,
   max_depth=8,
   min_child_weight=42,
   scale_pos_weight=5,
   subsample=0.6,
-  reg_alpha=0,
+  reg_alpha=0.0,
   reg_lambda=3.75,
   gamma=0.5,
 )

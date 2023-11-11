@@ -3,7 +3,7 @@ Tune an XGBoost model on a heart disease dataset
 by ignoring a few columns of data.
 """
 
-from heapq import nlargest
+from heapq import nlargest, nsmallest
 import logging as log
 from numpy import mean
 import pandas
@@ -57,7 +57,7 @@ def powerset(iterable: Iterable, max_length: int):
 model = XGBClassifier(
   n_jobs=2,
   random_state=6,
-  n_estimators=3,
+  n_estimators=5,
   learning_rate=0.01,
   max_depth=8,
   min_child_weight=42,
@@ -71,7 +71,7 @@ log.debug(f'model:\n{model}')
 
 irrelevant_feature_sets: list[tuple[float, str]] = []
 
-for irrelevant_features in tqdm(list(powerset(original_data.columns, 2))):
+for irrelevant_features in tqdm(list(powerset(original_data.columns, 3))):
   data = original_data.copy(deep=True)
   target = 'HadHeartAttack'
 
@@ -112,4 +112,10 @@ for irrelevant_features in tqdm(list(powerset(original_data.columns, 2))):
 top_irrelevant_feature_sets = nlargest(10, irrelevant_feature_sets)
 log.info(f'Top 10 irrelevant feature sets:')
 for score, features in top_irrelevant_feature_sets:
-  log.info(f'{features}: {score}')
+  log.info(f'  {features}: {score}')
+
+# show top 10 relevant feature sets in order of AUC score
+top_relevant_feature_sets = nsmallest(10, irrelevant_feature_sets)
+log.info(f'Top 10 relevant feature sets:')
+for score, features in top_relevant_feature_sets:
+  log.info(f'  {features}: {score}')

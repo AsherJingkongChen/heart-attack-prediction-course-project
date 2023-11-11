@@ -1,0 +1,25 @@
+INFO    2023-11-11 22:50:01.828 Loaded dataset data/heart_2022_no_nans.csv to memory
+INFO    2023-11-11 22:50:02.524 Transformed values
+100%|█████████████████████████████████████████████████████| 10701/10701 [1:42:26<00:00,  1.74it/s]
+INFO    2023-11-12 00:32:28.911 Top 10 irrelevant feature sets:
+INFO    2023-11-12 00:32:28.911   ['MentalHealthDays', 'DifficultyWalking', 'WeightInKilograms']: 0.8822919558161085
+INFO    2023-11-12 00:32:28.911   ['State', 'MentalHealthDays', 'DifficultyWalking']: 0.8822751565748087
+INFO    2023-11-12 00:32:28.911   ['DifficultyWalking', 'WeightInKilograms', 'BMI']: 0.8822683672231992
+INFO    2023-11-12 00:32:28.911   ['State', 'DifficultyWalking', 'WeightInKilograms']: 0.8822443457670689
+INFO    2023-11-12 00:32:28.911   ['State', 'DifficultyWalking', 'BMI']: 0.8822385375393962
+INFO    2023-11-12 00:32:28.911   ['DifficultyWalking', 'HeightInMeters', 'WeightInKilograms']: 0.882220357769327
+INFO    2023-11-12 00:32:28.911   ['PhysicalHealthDays', 'MentalHealthDays', 'WeightInKilograms']: 0.8822158379585162
+INFO    2023-11-12 00:32:28.911   ['State', 'PhysicalHealthDays', 'MentalHealthDays']: 0.882214568991648
+INFO    2023-11-12 00:32:28.911   ['MentalHealthDays', 'DifficultyWalking', 'BMI']: 0.8822141071937369
+INFO    2023-11-12 00:32:28.911   ['PhysicalActivities', 'DifficultyWalking', 'WeightInKilograms']: 0.8821992811819022
+INFO    2023-11-12 00:32:28.911 Top 10 relevant feature sets:
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'ChestScan', 'AgeCategory']: 0.8045956923332453
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'HadStroke', 'AgeCategory']: 0.8091644985960201
+INFO    2023-11-12 00:32:28.911   ['RemovedTeeth', 'HadAngina', 'AgeCategory']: 0.8110815900014154
+INFO    2023-11-12 00:32:28.911   ['Sex', 'HadAngina', 'AgeCategory']: 0.8111981737063761
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'AgeCategory', 'PneumoVaxEver']: 0.813507865447896
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'HadDiabetes', 'AgeCategory']: 0.814399022071528
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'DifficultyWalking', 'AgeCategory']: 0.8147510369189418
+INFO    2023-11-12 00:32:28.911   ['GeneralHealth', 'HadAngina', 'AgeCategory']: 0.8150165373886545
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'HadStroke', 'ChestScan']: 0.8159432131674172
+INFO    2023-11-12 00:32:28.911   ['HadAngina', 'HadArthritis', 'AgeCategory']: 0.8159602828595375
