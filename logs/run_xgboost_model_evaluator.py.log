@@ -1,10 +1,11 @@
-INFO    2023-11-13 12:42:42.162 Loaded dataset data/heart_2022_no_nans.csv to memory
-INFO    2023-11-13 12:42:42.258 Removed irrelevant features
-INFO    2023-11-13 12:42:42.496 Removed rows with missing values
-INFO    2023-11-13 12:42:43.472 Transformed values
-INFO    2023-11-13 12:42:43.474 Started model cross validation
-INFO    2023-11-13 12:43:21.100 Terminated model cross validation
-INFO    2023-11-13 12:43:21.101 Average AUC: 0.8915522805052529
-INFO    2023-11-13 12:43:32.544 Started model standalone evaluation
-INFO    2023-11-13 12:43:32.903 Terminated model standalone evaluation
-INFO    2023-11-13 12:43:32.903 AUC: 0.892682758878313
+INFO	2023-11-13 15:35:26.252	Loaded dataset data/heart_2022_no_nans.csv to memory
+INFO	2023-11-13 15:35:26.354	Removed irrelevant features
+INFO	2023-11-13 15:35:26.593	Removed rows with missing values
+INFO	2023-11-13 15:35:27.576	Transformed values
+INFO	2023-11-13 15:35:27.577	Started model cross validation
+INFO	2023-11-13 15:36:14.663	Terminated model cross validation
+INFO	2023-11-13 15:36:14.664	Average AUC: 0.8915747327754916
+INFO	2023-11-13 15:36:14.731	Started model standalone training
+INFO	2023-11-13 15:36:22.738	Started model standalone evaluation
+INFO	2023-11-13 15:36:25.374	Terminated model standalone evaluation
+INFO	2023-11-13 15:36:25.375	AUC: 0.8919625759354277

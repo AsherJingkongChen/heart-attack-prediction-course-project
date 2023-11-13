@@ -4,6 +4,7 @@ using GridSearchCV with stratified k fold method.
 """
 
 import logging as log
+from numpy import linspace
 import pandas
 from sklearn.model_selection import (
   GridSearchCV,
@@ -62,24 +63,25 @@ y = data[target]
 # define model
 model = GridSearchCV(
   estimator=XGBClassifier(
-    random_state=6,
     n_jobs=1,
-    n_estimators=1,
-    num_parallel_tree=1,
-    learning_rate=0.01,
+    random_state=6,
+    # n_estimators=500,
+    # learning_rate=0.01,
+    max_depth=8,
+    min_child_weight=42,
+    scale_pos_weight=5,
+    subsample=0.6,
+    reg_alpha=0.0,
+    reg_lambda=3.75,
+    gamma=0.5,
   ),
   param_grid={
-    'max_depth': [8, 7, 6, 3],
-    'min_child_weight': [42, 3, 4, 5, 10],
-    'scale_pos_weight': [5],
-    'subsample': [0.6],
-    'reg_alpha': [0, 1, 2, 3],
-    'reg_lambda': [3.75, 5, 10, 3],
-    'gamma': [0.5],
+    'n_estimators': [600, 650, 700],
+    'learning_rate': [0.005, 0.010, 0.015],
   },
   scoring='roc_auc',
-  cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
-  n_jobs=6,
+  cv=StratifiedKFold(n_splits=3, shuffle=True, random_state=6),
+  n_jobs=1,
   verbose=1,
 )
 

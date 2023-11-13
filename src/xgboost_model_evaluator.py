@@ -65,20 +65,21 @@ y = data[target]
 
 log.info('Transformed values')
 
-# define model
-model = XGBClassifier(
-  n_jobs=1,
-  random_state=6,
-  n_estimators=500,
-  learning_rate=0.01,
-  max_depth=8,
-  min_child_weight=42,
-  scale_pos_weight=5,
-  subsample=0.6,
-  reg_alpha=0.0,
-  reg_lambda=3.75,
-  gamma=0.5,
-)
+# define parameters
+model_params = {
+  'n_jobs': 1,
+  'random_state': 6,
+  'n_estimators': 650,
+  'learning_rate': 0.01,
+  'max_depth': 8,
+  'min_child_weight': 42,
+  'scale_pos_weight': 5,
+  'subsample': 0.6,
+  'reg_alpha': 0.0,
+  'reg_lambda': 3.75,
+  'gamma': 0.5,
+}
+model = XGBClassifier(**model_params)
 log.debug(f'model:\n{model}')
 
 # cross validation
@@ -93,20 +94,11 @@ log.info('Terminated model cross validation')
 log.debug(f'AUCs:\n{scores}')
 log.info(f'Average AUC: {mean(scores)}')
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=0)
-model = XGBClassifier(
-  n_jobs=1,
-  random_state=6,
-  n_estimators=500,
-  learning_rate=0.01,
-  max_depth=8,
-  min_child_weight=42,
-  scale_pos_weight=5,
-  subsample=0.6,
-  reg_alpha=0.0,
-  reg_lambda=3.75,
-  gamma=0.5,
-)
+# train test split for standalone evaluation
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.5, random_state=0)
+model = XGBClassifier(**model_params)
+
+log.info('Started model standalone training')
 model.fit(x_train, y_train)
 
 # evaluate model
