@@ -23,6 +23,11 @@ python3 src/xgboost_model_evaluator.py data/heart_2022_no_nans.csv
 - evaluation: [link](./src/xgboost_model_evaluator.py)
 - logging: [link](./logs/run_xgboost_model_evaluator.py.log)
 
+### Three Layers NN ML model
+- Python Tensorflow + Keras
+- notebook: [link](./notebooks/three_layers_nn_model_eval.ipynb)
+
 ## Environments
-- Pyt hon 3.9 with PIP
+- Python 3.9 with PIP
 - Windows, macOS (x86_64 & ARM64)
+- Google Colab
