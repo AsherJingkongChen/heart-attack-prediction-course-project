@@ -69,7 +69,7 @@ model = XGBClassifier(
 )
 log.debug(f'model:\n{model}')
 
-irrelevant_feature_sets: list[tuple[float, str]] = []
+irrelevant_feature_sets: list[tuple] = []
 
 for irrelevant_features in tqdm(list(powerset(original_data.columns, 3))):
   data = original_data.copy(deep=True)

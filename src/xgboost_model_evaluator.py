@@ -6,11 +6,13 @@ using stratified k-fold cross-validation.
 import logging as log
 from numpy import mean
 import pandas
+from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import (
   StratifiedKFold,
   cross_val_score,
+  train_test_split,
 )
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
 
@@ -58,10 +60,10 @@ for col in data.columns:
 # split target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
-y = LabelEncoder().fit_transform(data[target])
+y = data[target]
+# x = StandardScaler().fit_transform(x, y)
 
 log.info('Transformed values')
-log.debug(x.head())
 
 # define model
 model = XGBClassifier(
@@ -79,16 +81,38 @@ model = XGBClassifier(
 )
 log.debug(f'model:\n{model}')
 
-# evaluate model
-log.info('Started model evaluation')
-
 # cross validation
+log.info('Started model cross validation')
 scores = cross_val_score(
   model, x, y,
   scoring='roc_auc',
   cv=StratifiedKFold(n_splits=10, shuffle=True, random_state=6),
   n_jobs=4,
 )
-log.info('Terminated model evaluation')
+log.info('Terminated model cross validation')
 log.debug(f'AUCs:\n{scores}')
 log.info(f'Average AUC: {mean(scores)}')
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.1, random_state=0)
+model = XGBClassifier(
+  n_jobs=1,
+  random_state=6,
+  n_estimators=500,
+  learning_rate=0.01,
+  max_depth=8,
+  min_child_weight=42,
+  scale_pos_weight=5,
+  subsample=0.6,
+  reg_alpha=0.0,
+  reg_lambda=3.75,
+  gamma=0.5,
+)
+model.fit(x_train, y_train)
+
+# evaluate model
+log.info('Started model standalone evaluation')
+y_pred = model.predict_proba(x_test)[:,1]
+auc = roc_auc_score(y_test, y_pred)
+
+log.info('Terminated model standalone evaluation')
+log.info(f'AUC: {auc}')

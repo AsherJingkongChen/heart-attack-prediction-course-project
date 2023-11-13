@@ -48,17 +48,16 @@ log.info('Removed irrelevant features')
 data.dropna(inplace=True)
 log.info('Removed rows with missing values')
 
+# transform values to numeric
+for col in data.columns:
+  if data[col].dtype == 'object':
+    data[col] = LabelEncoder().fit_transform(data[col])
+log.info('Transformed values')
+
 # define target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
 y = data[target]
-
-# transform values to numeric
-for col in x.columns:
-  if x[col].dtype == 'object':
-    x[col] = LabelEncoder().fit_transform(x[col])
-y = pandas.Series(LabelEncoder().fit_transform(y))
-log.info('Transformed values')
 
 # define model
 model = GridSearchCV(
