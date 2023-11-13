@@ -10,7 +10,7 @@ from sklearn.model_selection import (
   StratifiedKFold,
   cross_val_score,
 )
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sys import argv, executable
 from xgboost import XGBClassifier
 
@@ -58,10 +58,11 @@ for col in data.columns:
 # split target and features
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
-y = LabelEncoder().fit_transform(data[target])
+y = data[target]
+x = StandardScaler().fit_transform(x, y)
 
 log.info('Transformed values')
-log.debug(x.head())
+# log.debug(x.head())
 
 # define model
 model = XGBClassifier(
