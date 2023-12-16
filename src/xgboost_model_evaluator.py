@@ -15,6 +15,8 @@ from sklearn.model_selection import (
 from sklearn.preprocessing import LabelEncoder
 from sys import argv, executable
 from xgboost import XGBClassifier
+# from catboost import CatBoostClassifier
+# from lightgbm import LGBMClassifier
 
 log.basicConfig(
   level=log.INFO,
@@ -61,7 +63,6 @@ for col in data.columns:
 target = 'HadHeartAttack'
 x = data.drop(columns=target)
 y = data[target]
-# x = StandardScaler().fit_transform(x, y)
 
 log.info('Transformed values')
 

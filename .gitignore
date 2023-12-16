@@ -4,8 +4,11 @@
 *.swp
 
 /notebooks/logs
+/notebooks/logs.log
+/notebooks/catboost_info
+
 tmp
 __pycache__
 
-# data/heart_2022_no_nans.csv
-data/heart_2022_with_nans.csv
+/data/heart_2022_no_nans.csv
+/data/heart_2022_with_nans.csv
