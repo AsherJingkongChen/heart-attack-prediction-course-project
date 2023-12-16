@@ -27,6 +27,10 @@ python3 src/xgboost_model_evaluator.py data/heart_2022_no_nans.csv
 - Python Tensorflow + Keras
 - notebook: [link](./notebooks/three_layers_nn_model_eval.ipynb)
 
+### Auto ML
+- Python Pycaret
+- notebook: [link](./notebooks/heart_analyze.ipynb)
+
 ## Environments
 - Python 3.9 with PIP
 - Windows, macOS (x86_64 & ARM64)
