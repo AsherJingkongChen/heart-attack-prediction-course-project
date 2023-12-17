@@ -79,6 +79,7 @@ model_params = {
   'reg_alpha': 0.0,
   'reg_lambda': 3.75,
   'gamma': 0.5,
+  'eval_metric': 'aucpr',
 }
 model = XGBClassifier(**model_params)
 log.debug(f'model:\n{model}')
@@ -95,17 +96,17 @@ log.info('Terminated model cross validation')
 log.debug(f'AUCs:\n{scores}')
 log.info(f'Average AUC: {mean(scores)}')
 
-# train test split for standalone evaluation
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.5, random_state=0)
+# train test split for hold-out evaluation
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=0)
 model = XGBClassifier(**model_params)
 
-log.info('Started model standalone training')
+log.info('Started model hold-out training')
 model.fit(x_train, y_train)
 
 # evaluate model
-log.info('Started model standalone evaluation')
+log.info('Started model hold-out evaluation')
 y_pred = model.predict_proba(x_test)[:,1]
 auc = roc_auc_score(y_test, y_pred)
 
-log.info('Terminated model standalone evaluation')
+log.info('Terminated model hold-out evaluation')
 log.info(f'AUC: {auc}')
